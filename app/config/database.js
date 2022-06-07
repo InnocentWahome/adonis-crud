@@ -1,5 +1,5 @@
 module.exports = (mongoose) => {
-  mongoose.connect(process.env.MONGODB_URI, {
+  mongoose.connect('mongodb+srv://innocent:wahome2020@timetracker.elei8.mongodb.net/TaskTracker?retryWrites=true&w=majority', {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useCreateIndex: true,

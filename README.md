@@ -1,12 +1,12 @@
-# Kanban - (server)
+# Kaziflow - (server)
 
-> Time tracking tool
+> Task / Team / Project / Employee tracking tool
 
 ## Installation
 
 ```bash
 ### Clone the git repository
-git clone
+git clone https://github.com/InnocentWahome/kaziflow-server.git
 
 ### Setup environment variables
 cp .env.example .env
@@ -23,4 +23,4 @@ npm start
 
 ### Author
 
-- [Innocent Wahome](mailto: innocentwahome@gmail.com)
+- [Caren Nduta](mailto: karen@gmail.com)

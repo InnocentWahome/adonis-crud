@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 // .env file configurations
 require('dotenv/config');
 
@@ -20,13 +21,19 @@ const {
 // initializng the app
 const app = express();
 
+app.use('/healthcheck', require('express-healthcheck')({
+  healthy() {
+    return { everything: 'is ok' };
+  },
+}));
+
 //  required middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
 
 // Default server port
-app.get('/', (req, res) => {
+app.get('/api/v1', (req, res) => {
   res.send('Your server is running');
 });
 

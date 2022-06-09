@@ -17,7 +17,7 @@ const EmployeeSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['employee', 'intern'],
+    enum: ['employee', 'admin'],
     default: 'employee',
   },
   phoneNumber: {
@@ -31,7 +31,7 @@ const EmployeeSchema = new Schema({
   },
   isAdmin: {
     type: Boolean,
-    required: false,
+    required: true,
     default: false,
   },
 }, {

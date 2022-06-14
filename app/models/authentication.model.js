@@ -2,7 +2,7 @@
 const { Schema, model } = require('mongoose');
 // const bcrypt = require('bcrypt');
 
-const EmployeeSchema = new Schema({
+const AuthenticationSchema = new Schema({
   firstName: {
     type: String,
     required: false,
@@ -24,11 +24,11 @@ const EmployeeSchema = new Schema({
   phoneNumber: {
     type: Number,
     required: false,
-    unique: false,
+    unique: true,
   },
-  password: String,
-  dateOfBirth: {
-    type: Date,
+  password: {
+    type: String,
+    required: true,
   },
   isAdmin: {
     type: Boolean,
@@ -39,16 +39,11 @@ const EmployeeSchema = new Schema({
   timestamps: true,
 });
 
-// EmployeeSchema.pre('save', function () {
+// AuthenticationSchema.pre('save', function () {
 //   if (this.isModified('password')) {
 //     const salt = bcrypt.genSalt(10);
-//     const stringPassword = this.password.toString();
-//     bcrypt.hash(stringPassword, salt);
+//     bcrypt.hash(this.password.toString(), salt);
 //   }
 // });
 
-// EmployeeSchema.virtual('fullName').get(function () {
-//   return `${this.name.firstName} ${this.name.lastName}`;
-// });
-
-module.exports = model('Employee', EmployeeSchema);
+module.exports = model('Authentication', AuthenticationSchema);

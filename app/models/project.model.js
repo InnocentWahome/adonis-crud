@@ -9,19 +9,38 @@ const ProjectSchema = new Schema({
   description: {
     type: String,
   },
-  lead: {
-    type: Schema.Types.ObjectId,
-    ref: 'Employee',
-    required: false,
+  // lead: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Employee',
+  //   required: false,
+  // },
+  leader: {
+    type: String,
+    required: true,
+    unique: false,
   },
   category: {
     type: String,
     enum: ['blockchain', 'website', 'application'],
     default: 'application',
   },
+  // team: {
+  //   type: Schema.Types.ObjectId,
+  //   ref: 'Team',
+  // },
   team: {
-    type: Schema.Types.ObjectId,
-    ref: 'Team',
+    type: String,
+    // enum: ['blockchain', 'website', 'application'],
+    // default: 'application',
+  },
+  tasks: {
+    type: String,
+  },
+  participants: {
+    type: String,
+  },
+  progress: {
+    type: Number,
   },
   status: {
     type: String,

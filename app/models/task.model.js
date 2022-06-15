@@ -18,6 +18,13 @@ const TaskSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Employee',
   }],
+  reporter: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Employee',
+  }],
+  progress: {
+    type: Number,
+  },
   status: {
     type: String,
     enum: ['assigned', 'in-progress', 'under-review', 'completed'],

@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 const { Schema, model } = require('mongoose');
-// const bcrypt = require('bcrypt');
+const bcrypt = require('bcrypt');
 
 const EmployeeSchema = new Schema({
   firstName: {
@@ -39,16 +39,16 @@ const EmployeeSchema = new Schema({
   timestamps: true,
 });
 
-// EmployeeSchema.pre('save', function () {
-//   if (this.isModified('password')) {
-//     const salt = bcrypt.genSalt(10);
-//     const stringPassword = this.password.toString();
-//     bcrypt.hash(stringPassword, salt);
-//   }
-// });
+EmployeeSchema.pre('save', function () {
+  if (this.isModified('password')) {
+    const salt = bcrypt.genSalt(10);
+    const stringPassword = this.password.toString();
+    bcrypt.hash(stringPassword, salt);
+  }
+});
 
-// EmployeeSchema.virtual('fullName').get(function () {
-//   return `${this.name.firstName} ${this.name.lastName}`;
-// });
+EmployeeSchema.virtual('fullName').get(function () {
+  return `${this.name.firstName} ${this.name.lastName}`;
+});
 
 module.exports = model('Employee', EmployeeSchema);

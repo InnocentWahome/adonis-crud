@@ -8,7 +8,10 @@ const TeamSchema = new Schema({
   description: {
     type: String,
   },
-  lead: {
+  responsibilities: {
+    type: String,
+  },
+  leader: {
     type: Schema.Types.ObjectId,
     ref: 'Employee',
   },

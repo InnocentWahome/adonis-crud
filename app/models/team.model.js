@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 const { Schema, model } = require('mongoose');
 
 const TeamSchema = new Schema({
@@ -14,10 +15,12 @@ const TeamSchema = new Schema({
   leader: {
     type: Schema.Types.ObjectId,
     ref: 'Employee',
+    type: String,
   },
   members: [{
     type: Schema.Types.ObjectId,
     ref: 'Employee',
+    type: String,
   }],
 }, {
   timestamps: true,

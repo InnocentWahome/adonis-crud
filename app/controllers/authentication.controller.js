@@ -123,22 +123,25 @@ module.exports = {
    */
   register: async (req, res) => {
     try {
-      const thePassword = req.body.password;
-      const saltRounds = 10;
-      bcrypt.genSalt(saltRounds, (saltError, salt) => {
-        if (saltError) {
-          throw saltError;
-        } else {
-          bcrypt.hash(thePassword, salt, (hashError, hash) => {
-            if (hashError) {
-              throw hashError;
-            } else {
-              console.log(hash);
-              // $2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K
-            }
-          });
-        }
-      });
+      // const thePassword = req.body.password;
+      // const saltRounds = 10;
+      // bcrypt.genSalt(saltRounds, (saltError, salt) => {
+      //   if (saltError) {
+      //     throw saltError;
+      //   } else {
+      //     bcrypt.hash(thePassword, salt, (hashError, hash) => {
+      //       if (hashError) {
+      //         throw hashError;
+      //       } else {
+      //         console.log(hash);
+      //         // $2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K
+      //       }
+      //     });
+      //   }
+      // });
+      const password = req.body.password.toString();
+      // const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hash(password, 10);
       const employee = new Employee({
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -146,7 +149,7 @@ module.exports = {
         role: req.body.role,
         email: req.body.email,
         name: req.body.name,
-        password: thePassword,
+        password: hash,
         isAdmin: req.body.isAdmin,
       });
       await Employee.findOne({

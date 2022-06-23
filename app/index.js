@@ -25,11 +25,14 @@ const {
 // initializing the app
 const app = express();
 
-app.use('/healthcheck', require('express-healthcheck')({
-  healthy() {
-    return { everything: 'is ok' };
-  },
-}));
+app.use(
+  '/healthcheck',
+  require('express-healthcheck')({
+    healthy() {
+      return { everything: 'is ok' };
+    },
+  }),
+);
 
 //  required middleware
 app.use(express.json());
@@ -40,47 +43,6 @@ app.use(cors());
 app.get('/api/v1', (req, res) => {
   res.send('Your server is running');
 });
-
-// // Signup --- post route
-// app.post('/signup', (req, res) => {
-//   const thePassword = req.body.password;
-//   const saltRounds = 10;
-
-//   bcrypt.genSalt(saltRounds, (saltError, salt) => {
-//     if (saltError) {
-//       throw saltError;
-//     } else {
-//       bcrypt.hash(thePassword, salt, (hashError, hash) => {
-//         if (hashError) {
-//           throw hashError;
-//         } else {
-//           console.log(hash);
-//           // $2a$10$FEBywZh8u9M0Cec/0mWep.1kXrwKeiWDba6tdKvDfEBjyePJnDT7K
-//         }
-//       });
-//     }
-//   });
-//   const newUser = new User({
-//     email: req.body.email,
-//     name: req.body.name,
-//     password: thePassword,
-
-//   });
-//   newUser.save((err) => {
-//     if (err) {
-//       return res.status(400).json({
-//         success: false,
-//         title: err.name,
-//         message: err.message,
-//         error: err,
-//         data: {},
-//       });
-//     }
-//     return res.status(200).json({
-//       title: 'signup success',
-//     });
-//   });
-// });
 
 // Login ---post route
 app.post('/login', (req, res) => {

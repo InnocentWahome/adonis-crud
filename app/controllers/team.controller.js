@@ -92,6 +92,9 @@ module.exports = {
       const team = await Team.findByIdAndUpdate({ _id: req.params.id }, {
         name: req.body.name,
         description: req.body.description,
+        leader: req.body.leader,
+        responsibilities: req.body.responsibilities,
+        members: req.body.members,
       }, {
         new: true,
       });

@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 const { Schema, model } = require('mongoose');
 
 const TaskSchema = new Schema({
@@ -13,21 +14,25 @@ const TaskSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: 'Project',
     required: false,
+    type: String,
+
   },
   assignees: [{
     type: Schema.Types.ObjectId,
     ref: 'Employee',
+    type: String,
   }],
   reporter: [{
     type: Schema.Types.ObjectId,
     ref: 'Employee',
+    type: String,
   }],
   progress: {
     type: Number,
   },
   status: {
     type: String,
-    enum: ['assigned', 'in-progress', 'under-review', 'completed'],
+    enum: ['assigned', 'to-do', 'in-progress', 'in-review', 'completed'],
     default: 'initiated',
   },
   dueDate: {

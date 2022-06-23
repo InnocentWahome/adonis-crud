@@ -1,6 +1,5 @@
 /* eslint-disable func-names */
 const { Schema, model } = require('mongoose');
-// const bcrypt = require('bcrypt');
 
 const AuthenticationSchema = new Schema({
   firstName: {
@@ -26,9 +25,9 @@ const AuthenticationSchema = new Schema({
     required: false,
     unique: true,
   },
-  password: {
-    type: String,
-    required: true,
+  password: String,
+  dateOfBirth: {
+    type: Date,
   },
   isAdmin: {
     type: Boolean,
@@ -38,12 +37,5 @@ const AuthenticationSchema = new Schema({
 }, {
   timestamps: true,
 });
-
-// AuthenticationSchema.pre('save', function () {
-//   if (this.isModified('password')) {
-//     const salt = bcrypt.genSalt(10);
-//     bcrypt.hash(this.password.toString(), salt);
-//   }
-// });
 
 module.exports = model('Authentication', AuthenticationSchema);

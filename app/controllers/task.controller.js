@@ -94,6 +94,10 @@ module.exports = {
         description: req.body.description,
         status: req.body.status,
         dueDate: req.body.dueDate,
+        progress: req.body.progress,
+        project: req.body.project,
+        assignees: req.body.assignees,
+        reporter: req.body.reporter,
       }, {
         new: true,
       });

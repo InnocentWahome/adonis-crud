@@ -93,9 +93,12 @@ module.exports = {
         name: req.body.name,
         description: req.body.description,
         team: req.body.team,
-        startDate: req.body.startDate,
+        category: req.body.category,
         status: req.body.status,
-        endDate: req.body.endDate,
+        leader: req.body.leader,
+        tasks: req.body.tasks,
+        participants: req.body.participants,
+        startDate: req.body.startDate,
       }, {
         new: true,
       });

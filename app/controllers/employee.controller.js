@@ -1,3 +1,4 @@
+const bcrypt = require('bcrypt');
 const { Employee } = require('../models');
 
 module.exports = {
@@ -34,7 +35,20 @@ module.exports = {
    */
   create: async (req, res) => {
     try {
-      const employee = await Employee.create(req.body);
+      const { password } = req.body;
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+      const employee = {
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        phoneNumber: req.body.phoneNumber,
+        role: req.body.role,
+        email: req.body.email,
+        name: req.body.name,
+        password: hash,
+        isAdmin: req.body.isAdmin,
+      };
+      await Employee.create(employee);
       return res.status(200).json({
         success: true,
         message: 'Successfully created the employee',
@@ -48,7 +62,6 @@ module.exports = {
       });
     }
   },
-
   /**
    * GET /api/v1/employees/:id
    *
@@ -89,14 +102,24 @@ module.exports = {
    */
   update: async (req, res) => {
     try {
-      const employee = await Employee.findByIdAndUpdate({ _id: req.params.id }, {
-        firstName: req.body.firstName,
-        lastName: req.body.lastName,
-        email: req.body.email,
-        phone: req.body.phone,
-      }, {
-        new: true,
-      });
+      const { password } = req.body;
+      const salt = bcrypt.genSaltSync(10);
+      const hash = bcrypt.hashSync(password, salt);
+      const employee = await Employee.findByIdAndUpdate(
+        { _id: req.params.id },
+        {
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          phoneNumber: req.body.phoneNumber,
+          role: req.body.role,
+          isAdmin: req.body.isAdmin,
+          password: hash,
+        },
+        {
+          new: true,
+        },
+      );
       if (!employee) {
         return res.status(404).json({
           success: true,

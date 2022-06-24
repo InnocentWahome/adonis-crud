@@ -14,12 +14,12 @@ const TeamSchema = new Schema({
   },
   leader: {
     type: Schema.Types.ObjectId,
-    ref: 'Employee',
+    ref: 'User',
     type: String,
   },
   members: [{
     type: Schema.Types.ObjectId,
-    ref: 'Employee',
+    ref: 'User',
     type: String,
   }],
 }, {

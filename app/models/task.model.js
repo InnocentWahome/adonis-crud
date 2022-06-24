@@ -19,12 +19,12 @@ const TaskSchema = new Schema({
   },
   assignees: [{
     type: Schema.Types.ObjectId,
-    ref: 'Employee',
+    ref: 'User',
     type: String,
   }],
   reporter: [{
     type: Schema.Types.ObjectId,
-    ref: 'Employee',
+    ref: 'User',
     type: String,
   }],
   progress: {

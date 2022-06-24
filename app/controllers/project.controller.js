@@ -34,7 +34,13 @@ module.exports = {
    */
   create: async (req, res) => {
     try {
-      const project = await Project.create(req.body);
+      // const project = await Project.create(req.body);
+      const project = await Project.findOne({
+        leader: req.body.leader,
+        team: req.body.team,
+        participants: req.body.participants,
+      }).populate('leader', 'team');
+      await Project.create(req.body);
       return res.status(200).json({
         success: true,
         message: 'Successfully created the project',

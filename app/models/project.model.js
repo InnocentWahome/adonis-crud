@@ -11,10 +11,8 @@ const ProjectSchema = new Schema({
   },
   leader: {
     type: Schema.Types.ObjectId,
-    ref: 'Employee',
-    //   required: false,
+    ref: 'User',
     unique: false,
-
   },
   category: {
     type: String,
@@ -26,10 +24,12 @@ const ProjectSchema = new Schema({
     ref: 'Team',
   },
   tasks: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'Task',
   },
   participants: {
-    type: String,
+    type: Schema.Types.ObjectId,
+    ref: 'User',
   },
   progress: {
     type: Number,

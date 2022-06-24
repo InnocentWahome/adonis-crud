@@ -1,9 +1,9 @@
 const bcrypt = require('bcrypt');
-const { Employee } = require('../models');
+const { User } = require('../models');
 
 module.exports = {
   /**
-   * GET /api/v1/employees
+   * GET /api/v1/users
    *
    * @param req
    * @param res
@@ -11,11 +11,11 @@ module.exports = {
    */
   index: async (req, res) => {
     try {
-      const employees = await Employee.find({});
+      const users = await User.find({});
       return res.status(200).json({
         success: true,
-        message: 'Successfully retrieved all employees',
-        data: employees,
+        message: 'Successfully retrieved all users',
+        data: users,
       });
     } catch (error) {
       return res.status(500).json({
@@ -27,7 +27,7 @@ module.exports = {
   },
 
   /**
-   * POST /api/v1/employees
+   * POST /api/v1/users
    *
    * @param req
    * @param res
@@ -38,7 +38,7 @@ module.exports = {
       const { password } = req.body;
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
-      const employee = {
+      const user = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
         phoneNumber: req.body.phoneNumber,
@@ -48,11 +48,11 @@ module.exports = {
         password: hash,
         isAdmin: req.body.isAdmin,
       };
-      await Employee.create(employee);
+      await User.create(user);
       return res.status(200).json({
         success: true,
-        message: 'Successfully created the employee',
-        data: employee,
+        message: 'Successfully created the user',
+        data: user,
       });
     } catch (error) {
       return res.status(500).json({
@@ -63,7 +63,7 @@ module.exports = {
     }
   },
   /**
-   * GET /api/v1/employees/:id
+   * GET /api/v1/users/:id
    *
    * @param req
    * @param res
@@ -71,18 +71,18 @@ module.exports = {
    */
   show: async (req, res) => {
     try {
-      const employee = await Employee.findById(req.params.id);
-      if (!employee) {
+      const user = await User.findById(req.params.id);
+      if (!user) {
         return res.status(404).json({
           success: true,
-          message: 'Employee not found',
+          message: 'User not found',
           data: null,
         });
       }
       return res.status(200).json({
         success: true,
-        message: 'Successfully retrieved the employee',
-        data: employee,
+        message: 'Successfully retrieved the user',
+        data: user,
       });
     } catch (error) {
       return res.status(500).json({
@@ -94,7 +94,7 @@ module.exports = {
   },
 
   /**
-   * PUT /api/v1/employees/:id
+   * PUT /api/v1/users/:id
    *
    * @param req
    * @param res
@@ -105,7 +105,7 @@ module.exports = {
       const { password } = req.body;
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
-      const employee = await Employee.findByIdAndUpdate(
+      const user = await User.findByIdAndUpdate(
         { _id: req.params.id },
         {
           firstName: req.body.firstName,
@@ -120,17 +120,17 @@ module.exports = {
           new: true,
         },
       );
-      if (!employee) {
+      if (!user) {
         return res.status(404).json({
           success: true,
-          message: 'Employee not found',
+          message: 'User not found',
           data: null,
         });
       }
       return res.status(200).json({
         success: true,
-        message: 'Successfully updated the employee',
-        data: employee,
+        message: 'Successfully updated the user',
+        data: user,
       });
     } catch (error) {
       return res.status(500).json({
@@ -142,7 +142,7 @@ module.exports = {
   },
 
   /**
-   * DELETE /api/v1/employees/:id
+   * DELETE /api/v1/users/:id
    *
    * @param req
    * @param res
@@ -150,10 +150,10 @@ module.exports = {
    */
   delete: async (req, res) => {
     try {
-      await Employee.findByIdAndDelete(req.params.id);
+      await User.findByIdAndDelete(req.params.id);
       return res.status(200).json({
         success: true,
-        message: 'Successfully deleted the employee',
+        message: 'Successfully deleted the user',
         data: null,
       });
     } catch (error) {

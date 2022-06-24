@@ -1,7 +1,7 @@
 /* eslint-disable func-names */
 const { Schema, model } = require('mongoose');
 
-const AuthenticationSchema = new Schema({
+const UserSchema = new Schema({
   firstName: {
     type: String,
     required: false,
@@ -38,4 +38,4 @@ const AuthenticationSchema = new Schema({
   timestamps: true,
 });
 
-module.exports = model('Authentication', AuthenticationSchema);
+module.exports = model('User', UserSchema);

@@ -35,6 +35,8 @@ module.exports = {
   create: async (req, res) => {
     try {
       // const project = await Project.create(req.body);
+      const projectData = req.body;
+      // eslint-disable-next-line no-unused-vars
       const project = await Project.findOne({
         leader: req.body.leader,
         team: req.body.team,
@@ -44,7 +46,7 @@ module.exports = {
       return res.status(200).json({
         success: true,
         message: 'Successfully created the project',
-        data: project,
+        data: projectData,
       });
     } catch (error) {
       return res.status(500).json({

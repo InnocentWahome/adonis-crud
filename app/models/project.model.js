@@ -1,3 +1,4 @@
+/* eslint-disable no-dupe-keys */
 const { Schema, model } = require('mongoose');
 
 const ProjectSchema = new Schema({
@@ -12,6 +13,7 @@ const ProjectSchema = new Schema({
   leader: {
     type: Schema.Types.ObjectId,
     ref: 'User',
+    type: String,
     unique: false,
   },
   category: {
@@ -22,14 +24,13 @@ const ProjectSchema = new Schema({
   team: {
     type: Schema.Types.ObjectId,
     ref: 'Team',
+    type: String,
+
   },
   tasks: {
     type: Schema.Types.ObjectId,
     ref: 'Task',
-  },
-  participants: {
-    type: Schema.Types.ObjectId,
-    ref: 'User',
+    type: String,
   },
   progress: {
     type: Number,

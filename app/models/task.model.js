@@ -17,16 +17,16 @@ const TaskSchema = new Schema({
     type: String,
 
   },
-  assignees: [{
+  assignee: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     type: String,
-  }],
-  reporter: [{
+  },
+  reporter: {
     type: Schema.Types.ObjectId,
     ref: 'User',
     type: String,
-  }],
+  },
   progress: {
     type: Number,
   },

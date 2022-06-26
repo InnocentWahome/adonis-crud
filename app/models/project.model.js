@@ -27,11 +27,11 @@ const ProjectSchema = new Schema({
     type: String,
 
   },
-  tasks: {
+  tasks: [{
     type: Schema.Types.ObjectId,
     ref: 'Task',
     type: String,
-  },
+  }],
   progress: {
     type: Number,
   },

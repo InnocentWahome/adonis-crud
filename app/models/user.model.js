@@ -1,6 +1,6 @@
 /* eslint-disable func-names */
 const { Schema, model } = require('mongoose');
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema({
   firstName: {
@@ -39,11 +39,11 @@ const UserSchema = new Schema({
   timestamps: true,
 });
 
-UserSchema.pre('save', function () {
-  if (this.isModified('password')) {
-    const salt = bcrypt.genSalt(10);
-    bcrypt.hash(this.password, salt);
-  }
-});
+// UserSchema.pre('save', function () {
+//   if (this.isModified('password')) {
+//     const salt = bcrypt.genSalt(10);
+//     bcrypt.hash(this.password, salt);
+//   }
+// });
 
 module.exports = model('User', UserSchema);

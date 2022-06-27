@@ -49,7 +49,7 @@ app.use('/api/v1/tasks', TaskRoutes);
 app.use('/api/v1/teams', TeamRoutes);
 
 // define the port
-const port = parseInt(process.env.PORT, 10) || 3000;
+const port = parseInt(process.env.PORT, 10) || 5000;
 
 // port listening
 app.listen(port, () => {

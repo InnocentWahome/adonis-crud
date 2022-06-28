@@ -57,9 +57,9 @@ module.exports = {
    */
   register: async (req, res) => {
     try {
-      const { password } = req.body;
-      const salt = bcrypt.genSaltSync(10);
-      const hash = bcrypt.hashSync(password, salt);
+      // const { password } = req.body;
+      // const salt = bcrypt.genSaltSync(10);
+      // const hash = bcrypt.hashSync(password, salt);
       const user = {
         firstName: req.body.firstName,
         lastName: req.body.lastName,
@@ -67,7 +67,7 @@ module.exports = {
         role: req.body.role,
         email: req.body.email,
         name: req.body.name,
-        password: hash,
+        password: req.body.password,
         isAdmin: req.body.isAdmin,
       };
       await User.create(user);

@@ -96,7 +96,7 @@ module.exports = {
         dueDate: req.body.dueDate,
         progress: req.body.progress,
         project: req.body.project,
-        assignees: req.body.assignees,
+        assignee: req.body.assignee,
         reporter: req.body.reporter,
       }, {
         new: true,

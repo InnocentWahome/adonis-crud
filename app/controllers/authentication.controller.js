@@ -1,6 +1,6 @@
 /* eslint-disable consistent-return */
 /* eslint-disable no-console */
-const bcrypt = require('bcrypt');
+// const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
@@ -28,15 +28,21 @@ module.exports = {
           data: {},
         });
       }
-      // incorrect password
-      if (!bcrypt.compareSync(req.body.password.toString(), user.password)) {
+      // // incorrect password
+      // if (!bcrypt.compareSync(req.body.password.toString(), user.password)) {
+      //   return res.status(401).json({
+      //     success: false,
+      //     message: 'Invalid Login Credentials',
+      //     data: {},
+      //   });
+      // }
+      if (!(req.body.password.toString(), user.password)) {
         return res.status(401).json({
           success: false,
           message: 'Invalid Login Credentials',
           data: {},
         });
       }
-
       // IF ALL IS GOOD create a token and send to frontend
       // eslint-disable-next-line no-underscore-dangle
       const token = jwt.sign({ userId: user._id }, 'secretkey');

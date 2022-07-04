@@ -36,7 +36,7 @@ module.exports = {
       //     data: {},
       //   });
       // }
-      if (!(req.body.password.toString(), user.password)) {
+      if (req.body.password.toString() !== user.password.toString()) {
         return res.status(401).json({
           success: false,
           message: 'Invalid Login Credentials',

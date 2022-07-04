@@ -32,7 +32,7 @@ const TaskSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['assigned', 'to-do', 'in-progress', 'in-review', 'completed'],
+    enum: ['Un Assigned', 'To Do', 'In Progress', 'In Review', 'Completed'],
     default: 'initiated',
   },
   dueDate: {

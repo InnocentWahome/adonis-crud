@@ -20,7 +20,8 @@
     "express": "^4.17.1",
     "express-healthcheck": "^0.1.0",
     "jsonwebtoken": "^8.5.1",
-    "mongoose": "^5.12.15"
+    "mongoose": "^5.12.15",
+    "nodemailer": "^6.7.7"
   },
   "devDependencies": {
     "eslint": "^7.30.0",

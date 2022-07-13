@@ -9,6 +9,11 @@ const TeamSchema = new Schema({
   description: {
     type: String,
   },
+  avatar: {
+    type: String,
+    required: false,
+    unique: false,
+  },
   responsibilities: {
     type: String,
   },

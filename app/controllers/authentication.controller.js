@@ -2,6 +2,7 @@
 /* eslint-disable no-console */
 // const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const nodemailer = require('nodemailer');
 const { User } = require('../models');
 
 module.exports = {
@@ -100,18 +101,51 @@ module.exports = {
    */
   forgotPassword: async (req, res) => {
     try {
-      const user = await User.findById(req.params.id);
-      if (!user) {
-        return res.status(404).json({
-          success: true,
-          message: 'User not found',
-          data: null,
+      await User.findOne({ email: req.body.email }, (err, user) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            message: 'server error',
+            error: err,
+          });
+        }
+        if (!user) {
+          return res.status(404).json({
+            success: false,
+            message: 'User not found',
+            data: {},
+          });
+        }
+        const transporter = nodemailer.createTransport({
+          host: 'smtp.gmail.com',
+          port: 465,
+          secure: true,
+          service: 'gmail',
+          auth: {
+            user: 'innocentwahome@gmail.com',
+            pass: 'lesokqoeaiazzffg',
+          },
         });
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Successfully retrieved the user',
-        data: user,
+        const token = jwt.sign({ email: req.body.email }, 'secretkey');
+        const mailResponseBody = `Dear ${req.body.email}, <br> We have received your request to change password. Please click the link below to reset your password.<br><br>https://kaziflow.netlify.app/reset-password?token=${token}`;
+        const mailOptions = {
+          from: 'innocentwahome@gmail.com',
+          to: 'wahomeinnocent@gmail.com',
+          subject: 'Sending Email using Node.js',
+          html: mailResponseBody,
+        };
+
+        transporter.sendMail(mailOptions, (error, info) => {
+          if (error) {
+            console.log(error);
+          } else {
+            console.log(`Email sent: ${info.response}`);
+          }
+        });
+        return res.status(200).json({
+          success: true,
+          message: 'Verification email sent!',
+        });
       });
     } catch (error) {
       return res.status(500).json({
@@ -131,31 +165,35 @@ module.exports = {
    */
   resetPassword: async (req, res) => {
     try {
-      const user = await User.findByIdAndUpdate(
-        {
-          _id: req.params.id,
-        },
-        {
-          firstName: req.body.firstName,
-          lastName: req.body.lastName,
-          email: req.body.email,
-          phone: req.body.phone,
-        },
-        {
-          new: true,
-        },
-      );
-      if (!user) {
-        return res.status(404).json({
-          success: true,
-          message: 'User not found',
-          data: null,
+      await User.findOne({ email: req.body.email }, (err, user) => {
+        if (err) {
+          return res.status(500).json({
+            success: false,
+            message: 'server error',
+            error: err,
+          });
+        }
+        if (!user) {
+          return res.status(404).json({
+            success: false,
+            message: 'User not found',
+            data: {},
+          });
+        }
+        if (req.body.password !== req.body.confirmPassword) {
+          return res.status(401).json({
+            success: false,
+            message: 'Passwords do not match',
+            data: {},
+          });
+        }
+        User.findOne({ email: req.body.email }, () => {
+          // update user password req.body.password
         });
-      }
-      return res.status(200).json({
-        success: true,
-        message: 'Successfully updated the user',
-        data: user,
+        return res.status(200).json({
+          success: true,
+          message: 'Password has been reset!',
+        });
       });
     } catch (error) {
       return res.status(500).json({

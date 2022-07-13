@@ -7,6 +7,11 @@ const ProjectSchema = new Schema({
     required: true,
     unique: true,
   },
+  avatar: {
+    type: String,
+    required: false,
+    unique: false,
+  },
   description: {
     type: String,
   },
@@ -18,8 +23,8 @@ const ProjectSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ['blockchain', 'website', 'application'],
-    default: 'application',
+    enum: ['Blockchain', 'Website', 'Application'],
+    default: 'Application',
   },
   team: {
     type: Schema.Types.ObjectId,
@@ -37,7 +42,7 @@ const ProjectSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ['Initiated', 'In Progress', 'Completed', 'Terminated'],
+    enum: ['Initiated', 'In-Progress', 'Completed', 'Terminated'],
     default: 'initiated',
   },
   endDate: {

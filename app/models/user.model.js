@@ -3,13 +3,18 @@ const { Schema, model } = require('mongoose');
 // const bcrypt = require('bcrypt');
 
 const UserSchema = new Schema({
-  firstName: {
+  avatar: {
     type: String,
     required: false,
+    unique: false,
+  },
+  firstName: {
+    type: String,
+    required: true,
   },
   lastName: {
     type: String,
-    required: false,
+    required: true,
   },
   email: {
     type: String,
@@ -18,12 +23,12 @@ const UserSchema = new Schema({
   },
   role: {
     type: String,
-    enum: ['employee', 'admin'],
-    default: 'employee',
+    enum: ['Employee', 'Admin'],
+    default: 'Employee',
   },
   phoneNumber: {
     type: Number,
-    required: false,
+    required: true,
     unique: true,
   },
   password: String,

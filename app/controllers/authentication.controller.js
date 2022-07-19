@@ -130,8 +130,8 @@ module.exports = {
         const mailResponseBody = `Dear ${req.body.email}, <br> We have received your request to change password. Please click the link below to reset your password.<br><br>https://kaziflow.netlify.app/reset-password?token=${token}`;
         const mailOptions = {
           from: 'innocentwahome@gmail.com',
-          to: 'wahomeinnocent@gmail.com',
-          subject: 'Sending Email using Node.js',
+          to: req.body.email,
+          subject: 'Reset Password Request',
           html: mailResponseBody,
         };
 

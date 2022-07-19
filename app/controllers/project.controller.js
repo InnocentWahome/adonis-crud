@@ -105,6 +105,7 @@ module.exports = {
         status: req.body.status,
         leader: req.body.leader,
         tasks: req.body.tasks,
+        progress: req.body.progress,
         participants: req.body.participants,
         startDate: req.body.startDate,
       }, {
